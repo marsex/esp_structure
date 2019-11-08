@@ -14,4 +14,3 @@ def check_credentials():
 
 def get_credentials():
   import ap_st.py
-  
