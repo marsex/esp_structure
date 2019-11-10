@@ -2,7 +2,7 @@ import network
 import socket
 
 def scan_wifi():
-  global html
+  global html, cred_ssid, cred_psw
   
   station = network.WLAN(network.STA_IF) 
   station.active(True)

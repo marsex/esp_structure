@@ -39,7 +39,7 @@
       </table>
       <div class="psw" style="margin-top: 10px;">
         <label style="text-align: left;display: block;">Red:</label>
-        <input id="wifi_ssid" style="padding: 8px 8px; display: block;width: 94%;" value="Test net#2" disabled>
+        <input id="wifi_ssid" style="padding: 8px 8px; display: block;width: 94%;" disabled>
         <label style="text-align: left;display: block;">Contraseña:</label>
         <input id="wifi_psw" style="padding: 8px 8px;display: block;width: 94%;">
         <input onclick="send_data()"id="login_input" value="GUARDAR" type="submit" style="width: 100%;height: 58px;">
@@ -49,10 +49,12 @@
   <iframe id="data_frame" STYLE='position:absolute; TOP:0px; LEFT:0px'height="0" width="0"></iframe>
 <script>
 last_sender = ""
-selected_ssid = ""
+selected_ssid = "$cred_ssid"
+selected_psw = "$cred_psw"
 
 og_url = window.location.href
 document.getElementById('wifi_ssid').value = selected_ssid
+document.getElementById('wifi_psw').value = selected_psw
 
 function set_ssid(sender){
   if (last_sender != sender){last_sender.style="background:white"}
