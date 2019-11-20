@@ -1,14 +1,16 @@
 import network
 import socket
 
-def scan_wifi():
+def scan_wifi(sender_ssid, sender_psw):
   global html, cred_ssid, cred_psw
-  
+  cred_ssid = sender_ssid
+  cred_psw = sender_psw
+
   station = network.WLAN(network.STA_IF) 
   station.active(True)
-  
+
   wifi_list=station.scan()
-  
+
   tr_swap=""
   tr_format="""
   <tr>
@@ -16,7 +18,7 @@ def scan_wifi():
     <td class=$signal_state style="width:120px">$signal_state</td>
   </tr>
   """
-  
+
   for wifi_net in wifi_list:
     net_signal=int(str(wifi_net[3]).replace('-',''))
     net_ssid=str(wifi_net[0]).replace("b'",'')
@@ -33,11 +35,11 @@ def scan_wifi():
       
     tr_done = tr_format.replace('$ssid',net_ssid).replace('$signal_state',signal_state)
     tr_swap = tr_swap + tr_done
-    
+
   print(tr_swap)
   file = open('get_wifi.html','r')
   html = file.read()
-  html = html.replace('$tr_swap',tr_swap)
+  html = html.replace('$tr_swap',tr_swap).replace('$cred_ssid',cred_ssid).replace('$cred_psw',cred_psw)
   file.close()
   start()
 
@@ -64,8 +66,7 @@ def start():
     print('Listening port:',port)
     
     #Set the value of the given socket option
-    ap_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) 
-    
+    ap_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
     while True:
       client, address = ap_socket.accept()
@@ -75,11 +76,26 @@ def start():
       
       while True:
         line = client_file.readline()
-        print(line)
-
+        data = str(line).replace("b'",'').replace("'",'')
+        print(data)
         if not line or line == b'\r\n':
           break
-      response = html 
+        #"b'GET /?@ssid:TP-LINK_56A8@ssid_psw:1234oooooo HTTP/1.1\r\n'"
+        get_credentials = data.find('@credentials:')
+        end_data = data.find('@end')
+        if get_credentials != -1:
+          print('Found credentials')
+          c_data = data[get_credentials+len('@credentials:'): end_data]
+          print('Got credentials: ', c_data)
+          print('Saving credentials...')
+          file = open("credentials.data","w")
+          file.write(c_data)
+          file.close()
+          print('restarting machine...')
+          import machine
+          machine.reset()
+
+      response = html
       client.send(response)
       client.close()
   except:
@@ -89,7 +105,3 @@ def start():
     ap_wlan.active(False)
 
     print('ap_closed')
-
-
-
-

