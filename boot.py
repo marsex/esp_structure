@@ -11,6 +11,7 @@ def start():
   
   if value == True:
     wifi_state = wifi.connect(cred_ssid,cred_psw)
+    print(wifi_state)
     print("check_for_updates")
   else:
     credentials.get()

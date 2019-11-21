@@ -14,6 +14,7 @@ def connect(cred_ssid,cred_psw):
       while not st_wlan.isconnected():
         pass
       print('   Connected, st_wlan: ', st_wlan.ifconfig())
+      return True
   else:
     print('cred_ssid null')
     try:
