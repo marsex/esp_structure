@@ -41,9 +41,9 @@ def scan_wifi(sender_ssid, sender_psw):
   html = file.read()
   html = html.replace('$tr_swap',tr_swap).replace('$cred_ssid',cred_ssid).replace('$cred_psw',cred_psw)
   file.close()
-  start()
+  start_web_server()
 
-def start():
+def start_web_server():
   try:
     port=80
     ap_wlan = network.WLAN(network.AP_IF)
