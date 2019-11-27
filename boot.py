@@ -10,6 +10,6 @@ def start():
   if cred_state == True:
     wifi_state = wifi.connect(cred_ssid,cred_psw)
     if wifi_state == True:
-      update.check('structure')
+      update.check()
   else:
     credentials.get()
