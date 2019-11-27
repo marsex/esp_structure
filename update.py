@@ -1,7 +1,9 @@
 import urequests
 
 def update(file_name):
-  updated_file=urequests.get('https://raw.githubusercontent.com/marsex/esp_update/master/'+file_name+'.py')
+  git_url = 'https://raw.githubusercontent.com/marsex/esp_structure/master/'
+  updated_file=urequests.get(git_url+'version.py')
+  
   file = open(file_name+".py","w")
   file.write(updated_file.text)
   file.close()
