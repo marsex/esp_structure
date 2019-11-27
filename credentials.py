@@ -1,4 +1,5 @@
 def check():
+  global cred_ssid, cred_psw
   print('Check Wifi Credentials')
   file = open("credentials.data","r")
   data = file.read()
