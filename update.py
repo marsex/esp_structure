@@ -4,20 +4,39 @@ import json
 def check(module_name):
   print('git_sys_info: ', get_git_info())
   print('esp_sys_info: ', get_esp_info())
-  if esp_sys_info[module_name] != git_sys_info[module_name]:
-    print(module_name, "status: OUTDATED")
-  else:
-    print(module_name, "status: UPDATED")
-  
+  try:
+    if esp_sys_info[module_name] != git_sys_info[module_name]:
+      return False, module_name, "outdated"
+    else:
+      return True, module_name, "updated"
+  except:
+    return "error: module '"+ module_name +"' not founded"
+
+
+def update(module_name):
+  print('FETCH MODULE: ', module_name)
+
+
 def get_esp_info():
+  print('\n{\n\tgetting esp system info')
   global esp_sys_info
-  sys_file = open('sys_info','r')
-  esp_sys_info = json.loads(sys_file.read())
-  sys_file.close()
-  return esp_sys_info
-  
+  try:
+    sys_file = open('sys_info','r')
+    esp_sys_info = json.loads(sys_file.read())
+    sys_file.close()
+    print('\tgot esp system info\n}')
+    return esp_sys_info
+  except:
+    print('\terror getting esp system info\n}\n')
+
+
 def get_git_info():
+  print('\n{\n\tgetting git system info')
   global git_sys_info
   git_url = 'https://raw.githubusercontent.com/marsex/esp_structure/master/'
-  git_sys_info = json.loads(urequests.get(git_url+'sys_info').text)
-  return git_sys_info
+  try:
+    git_sys_info = json.loads(urequests.get(git_url+'sys_info').text)
+    print('\tgot git system info\n}')
+    return git_sys_info
+  except:
+    print('\terror getting git system info\n}\n')
