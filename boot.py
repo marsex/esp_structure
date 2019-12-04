@@ -1,6 +1,6 @@
-import wifi
 import credentials
 import update
+import wifi
 
 def start():
   global cred_ssid, cred_psw, wifi_state
@@ -12,7 +12,8 @@ def start():
     wifi_state = wifi.connect(cred_ssid,cred_psw)
     if wifi_state == True:
       print('Connected to WIFI, check for updates')
-      if update.check('structure')[0] == True:
-        
+      if update.check('system')[0] == True:
+        print('Connected to WIFI, check for updates')
   else:
     credentials.get()
+    

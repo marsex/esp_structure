@@ -1,6 +1,19 @@
 import urequests
 import json
 
+def update_system():
+  print('git_sys_info: ', get_git_info())
+  print('esp_sys_info: ', get_esp_info(),'\n')
+  update_list = []
+  for module in git_sys_info:
+    try:
+      if esp_sys_info[module] != git_sys_info[module]:
+        update_list.append(module)
+    except:
+      print("error: module '"+ module +"' not founded")
+  print('OUTDATED Modules:', update_list)
+  
+
 def check(module_name):
   print('git_sys_info: ', get_git_info())
   print('esp_sys_info: ', get_esp_info())
@@ -8,13 +21,10 @@ def check(module_name):
     if esp_sys_info[module_name] != git_sys_info[module_name]:
       return False, module_name, "outdated"
     else:
+    
       return True, module_name, "updated"
   except:
     return "error: module '"+ module_name +"' not founded"
-
-
-def update(module_name):
-  print('FETCH MODULE: ', module_name)
 
 
 def get_esp_info():
