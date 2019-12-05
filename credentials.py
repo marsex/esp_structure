@@ -1,13 +1,12 @@
 def check():
   global cred_ssid, cred_psw
-  print('Check Wifi Credentials')
-  file = open("credentials.data","r")
+  file = open("credentials","r")
   data = file.read()
   file.close()
 
   cred_ssid=data.split(",")[0]
   cred_psw=data.split(",")[1]
-  print(cred_ssid + ' ' + cred_psw)
+  
   if cred_ssid == 'null':
     return False,cred_ssid,cred_psw
   else:
