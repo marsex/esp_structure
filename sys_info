@@ -1,1 +1,10 @@
-{"structure":"0.9.1.1","credentials":"0.9.1.0","ap_st":"0.9.1.2"}
+{
+  "git_url":"https://raw.githubusercontent.com/marsex/esp_structure/master/",
+  "sys_info":"0.9.1.1",
+  "credentials.py":"0.9.1.1",
+  "ap_st.py":"0.9.1.1",
+  "wifi.py":"0.9.1.1",
+  "update.py":"0.9.1.1",
+  "sys_info.py":"0.9.1.1",
+  "color.py":"0.9.1.1"
+}
