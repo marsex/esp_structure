@@ -1,3 +1,5 @@
+import ap_st
+
 def check():
   global cred_ssid, cred_psw
   file = open("credentials","r")
@@ -12,8 +14,8 @@ def check():
   else:
     return True,cred_ssid,cred_psw
     
+    
 def get():
   print('Get Wifi Credentials')
-  import ap_st
   ap_st.scan_wifi(cred_ssid,cred_psw)
   

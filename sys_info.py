@@ -2,7 +2,7 @@ import urequests
 import json
 
 def git_url():
-  return esp_info()['git_url']
+  return git_sys_info['git_url']
 
 def esp_info():
   print('\n{\n\tgetting esp system info')

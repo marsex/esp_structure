@@ -3,7 +3,7 @@ import json
 import color
 import sys_info
 
-def update_system():
+def system():
   update_list = []
   for module in git_sys_info:
     try:
@@ -12,13 +12,16 @@ def update_system():
     except:
       print("error: module '"+ module +"' not founded")
   print('OUTDATED Modules:', update_list)
+  for outdated_module in update_list:
+    print(color.blue(),'\nUpdating:', outdated_module+color.normal())
+    pull_git_file(outdated_module)
 
 
 def check(module_name):
-  global git_sys_info, esp_sys_info
+  global git_sys_info, esp_sys_info, git_url
   esp_sys_info=sys_info.esp_info()
   git_sys_info=sys_info.git_info()
-
+  git_url=sys_info.git_url()
   print('\n'+color.blue()+'git_sys_info:',color.normal(), str(git_sys_info).replace(',',',\n').replace('{','{\n ').replace('}','\n}'))
   print('\n'+color.red()+'esp_sys_info:',color.normal(), str(esp_sys_info).replace(',',',\n').replace('{','{\n ').replace('}','\n}'))
 
@@ -42,9 +45,9 @@ def check(module_name):
 
 
 def pull_git_file(file_name):
-  updated_file=urequests.get(sys_info.git_url()+file_name)
-  file = open(file_name+".py","w")
+  updated_file=urequests.get(git_url+file_name)
+  file = open(file_name,"w")
   file.write(updated_file.text)
   file.close()
-  print(updated_file.text)
-  print('updated')
+  print(color.normal()+updated_file.text)
+  print(color.green(),file_name,'updated\n'+color.normal())

@@ -11,8 +11,11 @@ def start():
     wifi_state = wifi.connect(cred_ssid,cred_psw)
     if wifi_state == True:
       print('Check for updates')
-      if update.check('system')[0] == True:
-        print('\nSystem outdated\nUpdating system')
+      if update.check('sys_info')[0] == True:
+        print('\nSystem OUTDATED')
+        update.system()
+        import machine
+        machine.reset()
       else:
         print('\nSystem up to date\nStart Communication')
   else:
