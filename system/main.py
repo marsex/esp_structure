@@ -1,4 +1,4 @@
-from system import update, wifi, system 
+from system import wifi, update, system 
 import machine 
 
 def boot():
