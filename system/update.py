@@ -9,7 +9,8 @@ def system():
       if esp_sys_info[module] != git_sys_info[module]:
         update_list.append(module)
     except:
-      print("error: module '"+ module +"' not founded")
+      update_list.append(module)
+      print("error: module '"+ module +"' not founded on local esp system")
   print('OUTDATED Modules:', update_list)
   for outdated_module in update_list:
     print(color.blue(),'\nUpdating:', outdated_module+color.normal())
@@ -44,9 +45,15 @@ def check(module_name):
 
 
 def git_file(file_name):
-  updated_file=urequests.get(git_url+file_name)
-  file = open("/system/"+file_name,"w")
-  file.write(updated_file.text)
-  file.close()
-  print(color.normal()+updated_file.text)
-  print(color.green(),file_name,'updated\n'+color.normal())
+  try:
+    updated_file=urequests.get(git_url+file_name)
+    try:
+      file = open("/system/"+file_name,"w")
+      file.write(updated_file.text)
+      file.close()
+      print(color.normal()+updated_file.text)
+      print(color.green(),file_name,'updated\n'+color.normal())
+    except:
+      print("error: didn't found",file_name)
+  except:
+    print('error: getting git file')
