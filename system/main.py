@@ -1,10 +1,7 @@
-import credentials
-import machine
-import update
-import wifi
-import com 
+from system import credentials, update, wifi, com 
+import machine 
 
-def start():
+def boot():
   print('Check WiFi credentials')
   global cred_ssid, cred_psw, wifi_state
   cred_state, cred_ssid, cred_psw = credentials.check()
@@ -18,7 +15,7 @@ def start():
         update.system()
         machine.reset()
       else:
-        print('\nSystem up to date\nStart Communication')
+        print('\nSystem up to date\nStart system')
         #com.start()
   else:
     credentials.get()

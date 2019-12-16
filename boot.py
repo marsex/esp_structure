@@ -1,2 +1,2 @@
-import main
-main.start()
+from system import main
+main.boot()

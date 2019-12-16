@@ -1,8 +1,8 @@
-import ap_st
+from system import ap_st
 
 def check():
   global cred_ssid, cred_psw
-  file = open("credentials","r")
+  file = open("/system/credentials","r")
   data = file.read()
   file.close()
 

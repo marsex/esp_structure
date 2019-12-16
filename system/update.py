@@ -1,7 +1,6 @@
 import urequests
 import json
-import color
-import sys_info
+from system import color, sys_info
 
 def system():
   update_list = []
@@ -46,7 +45,7 @@ def check(module_name):
 
 def git_file(file_name):
   updated_file=urequests.get(git_url+file_name)
-  file = open(file_name,"w")
+  file = open("/system/"+file_name,"w")
   file.write(updated_file.text)
   file.close()
   print(color.normal()+updated_file.text)
