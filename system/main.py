@@ -2,10 +2,10 @@ from system import credentials, update, wifi, com
 import machine 
 
 def boot():
-  print('Starting system version: 9.1.1.1')
+  print('Starting system version: 9.1.1.2')
   print('Check WiFi credentials')
   global cred_ssid, cred_psw, wifi_state
-  cred_state, cred_ssid, cred_psw = credentials.check()
+  cred_state, cred_ssid, cred_psw = wifi.credentials()
   if cred_state == True:
     print('Credentials true, connect to WIFI')
     wifi_state = wifi.connect(cred_ssid,cred_psw)
