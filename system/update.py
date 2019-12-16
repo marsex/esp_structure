@@ -1,7 +1,7 @@
 import urequests
 import json
 from system import color, sys_info
-
+ 
 def system():
   update_list = []
   for module in git_sys_info:
