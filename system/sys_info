@@ -6,6 +6,7 @@
   "wifi.py":"0.9.1.1",
   "update.py":"0.9.1.4",
   "sys_info.py":"0.9.1.1",
-  "color.py":"0.9.1.1"
-  "server.py":"0.9.1.3"
+  "color.py":"0.9.1.1",
+  "server.py":"0.9.1.3",
+  "main.py":"0.9.1.1"
 }

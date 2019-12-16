@@ -2,6 +2,7 @@ from system import credentials, update, wifi, com
 import machine 
 
 def boot():
+  print('Starting system version: 9.1.1.1')
   print('Check WiFi credentials')
   global cred_ssid, cred_psw, wifi_state
   cred_state, cred_ssid, cred_psw = credentials.check()
