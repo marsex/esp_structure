@@ -1,5 +1,5 @@
 {
-  "git_url":"https://raw.githubusercontent.com/marsex/esp_structure/master/",
+  "git_url":"https://raw.githubusercontent.com/marsex/esp_structure/master/system/",
   "sys_info":"0.9.1.1",
   "credentials.py":"0.9.1.1",
   "ap_st.py":"0.9.1.1",
