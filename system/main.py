@@ -1,8 +1,8 @@
-from system import credentials, update, wifi, com 
+from system import update, wifi, system 
 import machine 
 
 def boot():
-  print('Starting system version: 9.1.1.2')
+  print('System version: 9.1.1.3')
   print('Check WiFi credentials')
   global cred_ssid, cred_psw, wifi_state
   cred_state, cred_ssid, cred_psw = wifi.credentials()
@@ -17,6 +17,6 @@ def boot():
         machine.reset()
       else:
         print('\nSystem up to date\nStart system')
-        #com.start()
+        system.start()
   else:
-    credentials.get()
+    wifi.get_credentials()

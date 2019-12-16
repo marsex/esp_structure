@@ -17,10 +17,10 @@ def credentials():
     return True,cred_ssid,cred_psw
     
     
-def get():
+def get_credentials():
   print('Get Wifi Credentials')
   scan_wifi(cred_ssid,cred_psw)
-  parse_scan()
+  parse_scan(wifi_list)
   start_web_server()
 
 
@@ -35,7 +35,7 @@ def scan_wifi(sender_ssid, sender_psw):
   wifi_list=station.scan()
 
 
-def parse_scan():
+def parse_scan(wifi_list):
   tr_swap=""
   tr_format="""
   <tr>
