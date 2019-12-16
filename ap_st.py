@@ -1,5 +1,6 @@
 import network
 import socket
+import machine
 
 def scan_wifi(sender_ssid, sender_psw):
   global html, cred_ssid, cred_psw
@@ -26,7 +27,7 @@ def scan_wifi(sender_ssid, sender_psw):
     signal_state=''
     if net_signal <= 66:
       signal_state = "Excelente"
-    
+
     if net_signal >= 67:
       signal_state = "Buena"
       
@@ -92,7 +93,6 @@ def start_web_server():
           file.write(c_data)
           file.close()
           print('restarting machine...')
-          import machine
           machine.reset()
 
       response = html

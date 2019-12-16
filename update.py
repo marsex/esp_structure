@@ -14,7 +14,7 @@ def system():
   print('OUTDATED Modules:', update_list)
   for outdated_module in update_list:
     print(color.blue(),'\nUpdating:', outdated_module+color.normal())
-    pull_git_file(outdated_module)
+    git_file(outdated_module)
 
 
 def check(module_name):
@@ -44,7 +44,7 @@ def check(module_name):
     return "error: module '"+ module_name +"' not founded"
 
 
-def pull_git_file(file_name):
+def git_file(file_name):
   updated_file=urequests.get(git_url+file_name)
   file = open(file_name,"w")
   file.write(updated_file.text)

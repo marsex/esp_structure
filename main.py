@@ -1,6 +1,8 @@
 import credentials
+import machine
 import update
 import wifi
+import com 
 
 def start():
   print('Check WiFi credentials')
@@ -14,9 +16,9 @@ def start():
       if update.check('sys_info')[0] == True:
         print('\nSystem OUTDATED')
         update.system()
-        import machine
         machine.reset()
       else:
         print('\nSystem up to date\nStart Communication')
+        #com.start()
   else:
     credentials.get()
