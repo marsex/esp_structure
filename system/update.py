@@ -1,6 +1,5 @@
-import urequests
-import json
 from system import color, sys_info
+import urequests, json
  
 def system():
   update_list = []
