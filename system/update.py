@@ -1,4 +1,4 @@
-from system import color, sys_info
+from structure import color, sys_info
 import urequests, json
  
 def system():
@@ -47,7 +47,7 @@ def git_file(file_name):
   try:
     updated_file=urequests.get(git_url+file_name)
     try:
-      file = open("/system/"+file_name,"w")
+      file = open("/structure/"+file_name,"w")
       file.write(updated_file.text)
       file.close()
       print(color.normal()+updated_file.text)

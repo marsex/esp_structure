@@ -1,2 +1,2 @@
-from system import main
+from structure import main
 main.boot()

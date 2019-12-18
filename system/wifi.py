@@ -2,9 +2,9 @@ import network
 import socket
 import machine
 
-def credentials():
+def check_credentials():
   global cred_ssid, cred_psw
-  file = open("/system/credentials","r")
+  file = open("/structure/credentials","r")
   data = file.read()
   file.close()
 
@@ -26,7 +26,7 @@ def get_credentials():
 def set_credentials(c_data):
   print('Got credentials: ', c_data)
   print('Saving credentials...')
-  file = open("/system/credentials","w")
+  file = open("/structure/credentials","w")
   file.write(c_data)
   file.close()
   print('restarting machine...')
@@ -71,7 +71,7 @@ def parse_scan(wifi_list):
     tr_swap = tr_swap + tr_done
 
   print(tr_swap)
-  file = open('/system/get_wifi.html','r')
+  file = open('/structure/get_wifi.html','r')
   html = file.read()
   html = html.replace('$tr_swap',tr_swap).replace('$cred_ssid',cred_ssid).replace('$cred_psw',cred_psw)
   file.close()
