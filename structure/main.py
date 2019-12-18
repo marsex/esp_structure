@@ -3,8 +3,8 @@ import machine
 
 def boot():
   print('System version: 9.1.1.3')
-  print('Check WiFi credentials')
   global cred_ssid, cred_psw, wifi_state
+  print('Check WiFi credentials')
   credentials_state, cred_ssid, cred_psw = wifi.check_credentials()
   if credentials_state == True:
     print('Credentials true, connect to WIFI')
