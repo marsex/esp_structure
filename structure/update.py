@@ -57,7 +57,7 @@ def git_file(file_name):
   except:
     print('error: getting git file')
     
-def remote_update(from_url,file_name,file_dir)
+def remote_update(from_url,file_name,file_dir):
   try:
     updated_file=urequests.get(from_url)
     try:
@@ -69,4 +69,4 @@ def remote_update(from_url,file_name,file_dir)
     except:
       print("error: didn't found",file_name)
   except:
-    print('error: getting git file')
+    print('error: getting file')
