@@ -1,4 +1,7 @@
 def start():
-  print('System running')
-  from structure import com
-  com.start()
+  try:
+    from structure import com
+    print('System running')
+    com.start()
+  except:
+    print('System failure')
