@@ -10,8 +10,8 @@ import uasyncio as asyncio
 from time import sleep
 import uerrno
 
-inp_gpio=[36,39,34,35,32,23,22,21]
-out_gpio=[13,15,2,4,25,33,5,5]
+inp_gpio=[35,34,39,36,3,21,19,18,5,17,16,4]
+out_gpio=[32,33,25,26,27,14,12,13]
 
 red=("\033[1;31;40m")
 green=("\033[1;32;40m")
@@ -20,7 +20,7 @@ blue=("\033[1;34;40m")
 normal=("\033[0;37;40m")
 
 hostname="192.168.0.107"
-USER="esp03"
+USER="esp02"
 SSID="TP-LINK_56A8"
 PASSWORD="1234oooooo"
 data_in="null"
@@ -29,8 +29,8 @@ st_wlan=None
 ap_socket=None
 update=-1
 
-dht1 = dht.DHT22(machine.Pin(18, Pin.IN, Pin.PULL_UP))
-dht2 = dht.DHT22(machine.Pin(19, Pin.IN, Pin.PULL_UP))
+dht1 = dht.DHT22(machine.Pin(15, Pin.IN, Pin.PULL_UP))
+dht2 = dht.DHT22(machine.Pin(22, Pin.IN, Pin.PULL_UP))
 
 machine_data = {
   "command":"null",
@@ -390,6 +390,7 @@ async def await_dht():
 #measure_timer.init(period=5000, mode=Timer.PERIODIC, callback=lambda t:async_dht())
 
 #timeout.init(period=1000, mode=Timer.PERIODIC, callback=lambda t:http_get(hostname))
+
 
 
 
