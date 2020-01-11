@@ -58,7 +58,7 @@ def git_file(file_name):
     print('error: getting git file')
     
 def remote(file_name,file_dir,from_url):
-  print(color.blue+'\nRemotely updating',file_name,'from',file_url,'\n')  
+  print(color.blue+'\nRemotely updating',file_name,'from',from_url,'\n')  
   try:
     updated_file=urequests.get(from_url)
     try:
