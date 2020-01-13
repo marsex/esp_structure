@@ -58,9 +58,11 @@ def git_file(file_name):
     print('error: getting git file')
     
 def remote(file_name,file_dir,from_url):
-  print(color.blue+'\nRemotely updating',file_name,'from',from_url,'\n')  
+  print(color.blue,'\nRemotely updating:',file_name,'from:', from_url ,'\n')  
   try:
+    print('Get:',from_url)
     updated_file=urequests.get(from_url)
+    print('Got:',from_url)
     try:
       file = open(file_dir+"/"+file_name,"w")
       file.write(updated_file.text)
@@ -73,4 +75,5 @@ def remote(file_name,file_dir,from_url):
       print("error: didn't found",file_name)
   except:
     print('error: getting git file')
+
 
