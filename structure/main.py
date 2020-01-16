@@ -2,8 +2,7 @@ from structure import wifi, update, system
 import machine 
 
 def boot():
-  print('System version: 9.1.1.3')
-  global cred_ssid, cred_psw, wifi_state
+  print('\n\nStarting system\n-----------------------')
   print('Check WiFi credentials')
   credentials_state, cred_ssid, cred_psw = wifi.check_credentials()
   if credentials_state == True:
@@ -14,6 +13,8 @@ def boot():
       if update.check('sys_info')[0] == True:
         print('\nSystem OUTDATED')
         update.system()
+        print('\nSystem UPDATED')
+        print('\nRestarting system\n-----------------------\n\n')
         machine.reset()
       else:
         print('\nSystem up to date\nStart system')
