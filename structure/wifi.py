@@ -1,6 +1,5 @@
 import network
 import socket
-import machine
 
 def check_credentials():
   global cred_ssid, cred_psw
@@ -19,9 +18,11 @@ def check_credentials():
     
 def get_credentials():
   print('Get Wifi Credentials')
-  scan_wifi(cred_ssid,cred_psw)
-  parse_scan(wifi_list)
-  start_web_server()
+  station = network.WLAN(network.STA_IF) 
+  station.active(True)
+  html = create_html(station.scan())
+  start_web_server(html)
+
 
 def set_credentials(c_data):
   print('Got credentials: ', c_data)
@@ -30,21 +31,11 @@ def set_credentials(c_data):
   file.write(c_data)
   file.close()
   print('restarting machine...')
+  import machine
   machine.reset()
   
-def scan_wifi(sender_ssid, sender_psw):
-  global cred_ssid, cred_psw, wifi_list
-  cred_ssid = sender_ssid
-  cred_psw = sender_psw
 
-  station = network.WLAN(network.STA_IF) 
-  station.active(True)
-
-  wifi_list=station.scan()
-
-
-def parse_scan(wifi_list):
-  global html
+def create_html(scan_list):
   tr_swap=""
   tr_format="""
   <tr>
@@ -53,7 +44,7 @@ def parse_scan(wifi_list):
   </tr>
   """
 
-  for wifi_net in wifi_list:
+  for wifi_net in scan_list:
     net_signal=int(str(wifi_net[3]).replace('-',''))
     net_ssid=str(wifi_net[0]).replace("b'",'')
     net_ssid=net_ssid.replace("'",'')
@@ -75,9 +66,10 @@ def parse_scan(wifi_list):
   html = file.read()
   html = html.replace('$tr_swap',tr_swap).replace('$cred_ssid',cred_ssid).replace('$cred_psw',cred_psw)
   file.close()
+  return html
 
 
-def start_web_server():
+def start_web_server(html):
   try:
     port=80
     ap_wlan = network.WLAN(network.AP_IF)
@@ -165,3 +157,5 @@ def connect(cred_ssid,cred_psw):
       print('failed to reconnect')
       print('get wifi credentials')
       return False
+      
+      

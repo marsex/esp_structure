@@ -1,6 +1,6 @@
 from structure import color, sys_info
 import urequests, json
- 
+
 def system():
   update_list = []
   for module in git_sys_info:
@@ -56,7 +56,8 @@ def git_file(file_name):
       print("error: didn't found",file_name)
   except:
     print('error: getting git file')
-    
+
+
 def remote(file_name,file_dir,from_url):
   print(color.blue,'\nRemotely updating:',file_name,'from:', from_url ,'\n')  
   try:
