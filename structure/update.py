@@ -1,21 +1,6 @@
 from structure import color, sys_info
 import urequests, json
 
-def system():
-  update_list = []
-  for module in git_sys_info:
-    try:
-      if esp_sys_info[module] != git_sys_info[module]:
-        update_list.append(module)
-    except:
-      update_list.append(module)
-      print("error: module '"+ module +"' not founded on local esp system")
-  print('OUTDATED Modules:', update_list)
-  for outdated_module in update_list:
-    print(color.blue(),'\nUpdating:', outdated_module+color.normal())
-    git_file(outdated_module)
-
-
 def check(module_name):
   global git_sys_info, esp_sys_info, git_url
   esp_sys_info=sys_info.esp_info()
@@ -43,14 +28,29 @@ def check(module_name):
     return "error: module '"+ module_name +"' not founded"
 
 
+def system():
+  update_list = []
+  for module in git_sys_info:
+    try:
+      if esp_sys_info[module] != git_sys_info[module]:
+        update_list.append(module)
+    except:
+      update_list.append(module)
+      print("error: module '"+ module +"' not founded on local esp system")
+  print('OUTDATED Modules:', update_list)
+  for outdated_module in update_list:
+    print(color.blue(),'\nUpdating:', outdated_module+color.normal())
+    git_file(outdated_module)
+
+
 def git_file(file_name):
   try:
-    updated_file=urequests.get(git_url+file_name)
+    outdated_file=urequests.get(git_url+file_name)
     try:
       file = open("/structure/"+file_name,"w")
-      file.write(updated_file.text)
+      file.write(outdated_file.text)
       file.close()
-      print(color.normal()+updated_file.text)
+      print(color.normal()+outdated_file.text)
       print(color.green(),file_name,'updated\n'+color.normal())
     except:
       print("error: didn't found",file_name)
@@ -62,13 +62,13 @@ def remote(file_name,file_dir,from_url):
   print(color.blue,'\nRemotely updating:',file_name,'from:', from_url ,'\n')  
   try:
     print('Get:',from_url)
-    updated_file=urequests.get(from_url)
+    remote_file=urequests.get(from_url)
     print('Got:',from_url)
     try:
       file = open(file_dir+"/"+file_name,"w")
-      file.write(updated_file.text)
+      file.write(remote_file.text)
       file.close()
-      print(color.normal()+updated_file.text)
+      print(color.normal()+remote_file.text)
       print(color.green(),file_name,'updated\n'+color.normal())
       import machine
       machine.reset()
@@ -76,5 +76,3 @@ def remote(file_name,file_dir,from_url):
       print("error: didn't found",file_name)
   except:
     print('error: getting git file')
-
-
