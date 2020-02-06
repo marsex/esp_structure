@@ -5,7 +5,8 @@
   "update.py":"0.9.1.9",
   "sys_info.py":"0.9.1.5",
   "color.py":"0.9.1.3",
-  "system.py":"0.9.1.7",
   "com.py":"0.9.1.1",
-  "main.py":"0.9.1.6"
+  "main.py":"0.9.1.6",
+  "system.py":"0.9.1.7",
+  "ble_basic.py":"0.9.1.1"
 }
