@@ -3,6 +3,7 @@ import socket
 import time
 import dht
 import ujson
+import machine
 from machine import Timer, Pin
 import uasyncio as asyncio
 from time import sleep
@@ -16,24 +17,39 @@ USER="esp02"
 ap_wlan=None
 st_wlan=None
 ap_socket=None
-
 dht1 = dht.DHT22(machine.Pin(15, Pin.IN, Pin.PULL_UP))
 dht2 = dht.DHT22(machine.Pin(22, Pin.IN, Pin.PULL_UP))
 
-def start():
-  from structure import ble_basic as ble
-  
+def start():  
   create_data()
+  global ble_status
+  ble_status="disconnected"
   
-  loop = asyncio.get_event_loop()
+  ble_loop = asyncio.get_event_loop()  
+  ble_loop.create_task(ble_start(ble_status))
+  ble_loop.run_until_complete(killer())
   
-  loop.create_task(com())
-  loop.create_task(ble.start())
-  loop.create_task(await_dht())
-  loop.create_task(check_dht())
+  main_loop = asyncio.get_event_loop()  
+  main_loop.create_task(com())
+  main_loop.create_task(await_dht())
+  main_loop.create_task(check_dht())
+  main_loop.run_forever()
+  print("done")
   
-  loop.run_forever()
   
+async def killer():
+    print("killer")
+    
+async def ble_start(ble_st):
+    while True:
+        if ble_st == "disconnected":
+            from structure import ble_basic
+            ble_st="connected"
+            print("start ble")
+            ble_basic.advertise()
+        await asyncio.sleep(1)
+  
+
 async def com():
   while True:
     input_state = [machine.Pin(i, machine.Pin.IN).value() for i in inp_gpio]
@@ -84,7 +100,7 @@ async def com():
 
 
 def parse_data(client_data):
-    print(client_data)
+  print(client_data)
   try:
     parsed_input = str(client_data[2:len(client_data)-1].replace("\'", "\""))
     print(parsed_input)
@@ -182,7 +198,8 @@ async def await_dht():
 
 
 def create_data():
-  global machine_data = {
+  global machine_data
+  machine_data = {
     "command":"null",
     "version":"v0.9.1.1",
     "platform":"envasadora",
