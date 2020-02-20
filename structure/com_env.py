@@ -13,7 +13,7 @@ inp_gpio=[35,34,39,36,3,21,19,18,5,17,16,4]
 out_gpio=[32,33,25,26,27,14,12,13]
 
 hostname="192.168.0.107"
-USER="espcam"
+USER="esp02"
 ap_wlan=None
 st_wlan=None
 ap_socket=None
@@ -25,9 +25,9 @@ def start():
   global ble_status
   ble_status="disconnected"
   
-  #ble_loop = asyncio.get_event_loop()  
-  #ble_loop.create_task(ble_start(ble_status))
-  #ble_loop.run_until_complete(killer())
+  ble_loop = asyncio.get_event_loop()  
+  ble_loop.create_task(ble_start(ble_status))
+  ble_loop.run_until_complete(killer())
   
   main_loop = asyncio.get_event_loop()  
   main_loop.create_task(com())
